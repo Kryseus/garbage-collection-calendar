@@ -1,33 +1,32 @@
 import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import garbageList from "./garbageList";
 
-const localizer = momentLocalizer(moment)
-const myEventsList = [
-	{
-		'title': 'All Day Event',
-		'allDay': true,
-		'start': new Date(2015, 3, 0),
-		'end': new Date(2015, 3, 0)
-	},
-	{
-		'title': 'Long Event',
-		'start': new Date(2015, 3, 7),
-		'end': new Date(2015, 3, 10)
-	}
-]
+const localizer = momentLocalizer(moment);
 
-const garbageCalendar = props => (
+const garbageCalendar = (props) => (
   <div>
-    <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-    />
+    <div class="card">
+      <div class="card-body">
+        <Calendar
+          localizer={localizer}
+          events={garbageList}
+          startAccessor="start"
+          endAccessor="end"
+          defaultDate={moment().toDate()}
+          eventPropGetter={(event) => {
+            const eventData = garbageList.find((ot) => ot.id === event.id);
+            const backgroundColor = eventData && eventData.color;
+
+            return { style: { backgroundColor } };
+          }}
+          style={{ height: 500 }}
+        />
+      </div>
+    </div>
   </div>
-)
+);
 
 export default garbageCalendar;
