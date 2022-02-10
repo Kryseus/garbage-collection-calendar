@@ -8,14 +8,14 @@ const localizer = momentLocalizer(moment);
 
 const garbageCalendar = (props) => (
   <div>
-    <div class="card">
-      <div class="card-body">
+
         <Calendar
           localizer={localizer}
           events={garbageList}
           startAccessor="start"
           endAccessor="end"
           defaultDate={moment().toDate()}
+          views={['month']}
           eventPropGetter={(event) => {
             const eventData = garbageList.find((ot) => ot.id === event.id);
             const backgroundColor = eventData && eventData.color;
@@ -25,8 +25,6 @@ const garbageCalendar = (props) => (
           style={{ height: 500 }}
         />
       </div>
-    </div>
-  </div>
 );
 
 export default garbageCalendar;
